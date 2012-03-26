@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.swordapp</groupId>
-    <artifactId>sword-client</artifactId>
-    <version>2.0</version>
+    <artifactId>sword2-client</artifactId>
+    <version>0.9</version>
 
     <build>
         <plugins>
