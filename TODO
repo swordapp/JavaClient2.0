@@ -1,0 +1,24 @@
+TODO List
+=========
+
+This is a register of some things that still need to be adequately handled in this code library
+
+1/ Multipart does not work.
+
+This occurs when a 401 Unauthorised challenge is received.  In making the initial request, the library
+reads all of the data from the input stream to be delivered, and therefore cannot re-deliver it once
+authentication has taken place.
+
+
+Notes
+-----
+
+- Create mechanism for handling arbitrary response codes (might act on response codes that we understand, like
+302, etc); possible value in a response code handler with default behaviour that can be customised per-request
+
+- documentation
+
+- logging
+
+- modify foresite to allow namespace prefixes to be passed in
+
