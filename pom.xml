@@ -5,7 +5,7 @@
 
     <groupId>org.swordapp</groupId>
     <artifactId>sword2-client</artifactId>
-    <version>0.9</version>
+    <version>0.9.1</version>
 
     <build>
         <plugins>
