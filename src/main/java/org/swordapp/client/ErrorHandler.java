@@ -28,7 +28,7 @@ public class ErrorHandler
 			catch (ParsingException e)
 			{
 				// just ignore the body, probably content is erroneous
-				return new SWORDError(status, null);
+				return new SWORDError(status, "");
 			}
         }
         catch (IOException e)

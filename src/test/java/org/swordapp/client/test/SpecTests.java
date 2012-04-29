@@ -1,6 +1,5 @@
 package org.swordapp.client.test;
 
-import nu.xom.jaxen.function.FalseFunction;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 import org.junit.Before;
@@ -12,11 +11,9 @@ import org.swordapp.client.ClientConfiguration;
 import org.swordapp.client.Content;
 import org.swordapp.client.Deposit;
 import org.swordapp.client.DepositReceipt;
-import org.swordapp.client.Endpoints;
 import org.swordapp.client.EntryPart;
 import org.swordapp.client.OreStatement;
 import org.swordapp.client.SWORDClient;
-import org.swordapp.client.SWORDClientException;
 import org.swordapp.client.SWORDCollection;
 import org.swordapp.client.SWORDError;
 import org.swordapp.client.ServiceDocument;
@@ -25,8 +22,9 @@ import org.swordapp.client.SwordResponse;
 import org.swordapp.client.UriRegistry;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
+import java.util.Properties;
 
 // FIXME: these tests rely on a hard-coded set of fixtures to do with my local
 // set up.  This means anyone else trying to run these tests will need to reconfigure
@@ -45,13 +43,25 @@ public class SpecTests
 	public void setUp()
 			throws Exception
 	{
+        InputStream props = this.getClass().getClassLoader().getResourceAsStream("spectests.properties");
+        Properties properties = new Properties();
+        properties.load(props);
+        this.sdIRI = properties.getProperty("sdIRI");
+        this.user = properties.getProperty("user");
+        this.pass = properties.getProperty("pass");
+        this.obo = properties.getProperty("obo");
+        this.file = properties.getProperty("file");
+
+
 		// FIXME: should read this all from some test config, or try to auto-locate
 		// resources (particularly the file)
-		this.sdIRI = "http://localhost:8080/sd-uri";
-		this.user = "sword";
-		this.pass = "sword";
+        /*
+		this.sdIRI = "http://localhost:8080/swordv2/servicedocument";
+		this.user = "richard";
+		this.pass = "dspace";
 		this.obo = "obo";
 		this.file = "/home/richard/Code/External/JavaClient2.0/src/test/resources/example.zip";
+		*/
 		this.fileMd5 = DigestUtils.md5Hex(new FileInputStream(this.file));
 	}
 
@@ -289,7 +299,7 @@ public class SpecTests
 		deposit.setMd5(this.fileMd5);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass));
-		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass, this.obo));
+		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass));
 
 		assertTrue(receipt.getContentLink() != null);
 		Content content = client.getContent(receipt.getContentLink());
@@ -426,6 +436,7 @@ public class SpecTests
 		deposit.setFilename("example.zip");
 		deposit.setPackaging(UriRegistry.PACKAGE_SIMPLE_ZIP);
 		deposit.setMd5(this.fileMd5);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass));
@@ -456,6 +467,7 @@ public class SpecTests
 		deposit.setFilename("example.zip");
 		deposit.setPackaging(UriRegistry.PACKAGE_SIMPLE_ZIP);
 		deposit.setMd5(this.fileMd5);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, this.obo));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass, this.obo));
@@ -488,6 +500,7 @@ public class SpecTests
 
 		Deposit deposit = new Deposit();
 		deposit.setEntryPart(ep);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass));
@@ -520,6 +533,7 @@ public class SpecTests
 
 		Deposit deposit = new Deposit();
 		deposit.setEntryPart(ep);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, this.obo));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass, this.obo));
@@ -635,6 +649,7 @@ public class SpecTests
 		deposit.setFilename("example.zip");
 		deposit.setPackaging(UriRegistry.PACKAGE_SIMPLE_ZIP);
 		deposit.setMd5(this.fileMd5);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, this.obo));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass, this.obo));
@@ -657,6 +672,7 @@ public class SpecTests
 		deposit.setFilename("example.zip");
 		deposit.setPackaging(UriRegistry.PACKAGE_SIMPLE_ZIP);
 		deposit.setMd5(this.fileMd5);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass));
@@ -687,6 +703,7 @@ public class SpecTests
 		deposit.setFilename("example.zip");
 		deposit.setPackaging(UriRegistry.PACKAGE_SIMPLE_ZIP);
 		deposit.setMd5(this.fileMd5);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, this.obo));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass, this.obo));
@@ -718,6 +735,7 @@ public class SpecTests
 		deposit.setFilename("example.zip");
 		deposit.setPackaging(UriRegistry.PACKAGE_SIMPLE_ZIP);
 		deposit.setMd5(this.fileMd5);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass));
@@ -749,6 +767,7 @@ public class SpecTests
 		deposit.setFilename("example.zip");
 		deposit.setPackaging(UriRegistry.PACKAGE_SIMPLE_ZIP);
 		deposit.setMd5(this.fileMd5);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, this.obo));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass, this.obo));
@@ -782,6 +801,7 @@ public class SpecTests
 
 		Deposit deposit = new Deposit();
 		deposit.setEntryPart(ep);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass));
@@ -813,6 +833,7 @@ public class SpecTests
 
 		Deposit deposit = new Deposit();
 		deposit.setEntryPart(ep);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, this.obo));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass, this.obo));
@@ -928,6 +949,7 @@ public class SpecTests
 		deposit.setFilename("example.zip");
 		deposit.setPackaging(UriRegistry.PACKAGE_SIMPLE_ZIP);
 		deposit.setMd5(this.fileMd5);
+        deposit.setInProgress(true);
 
 		DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, this.obo));
 		receipt = client.getDepositReceipt(receipt.getLocation(), new AuthCredentials(this.user, this.pass, this.obo));

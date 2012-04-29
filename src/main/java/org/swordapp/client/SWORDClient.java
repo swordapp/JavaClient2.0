@@ -1247,7 +1247,7 @@ public class SWORDClient
         else if (rs.isError())
         {
             // FIXME: this needs to handle all the other possible response codes
-            log.info("Deposit request on " + url.toString() + " returned Error HTTP status " + status);
+            log.info("Deposit Receipt request on " + url.toString() + " returned Error HTTP status " + status);
 			ErrorHandler eh = new ErrorHandler();
             throw eh.handleError(resp);
         }
