@@ -1125,7 +1125,7 @@ public class SpecTests
 		try
 		{
 			// using an invalid OBO user
-			DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, "richard"));
+			DepositReceipt receipt = client.deposit(col, deposit, new AuthCredentials(this.user, this.pass, "ajklsdhfahhsadf"));
 			assertTrue(false);
 		}
 		catch (SWORDError e)
