@@ -10,16 +10,21 @@ public class SWORDError extends Exception
     private Document errorDoc = null;
     private String errorBody = null;
 
-    SWORDError(int status, String errorBody)
+    public SWORDError(int status, String errorBody, Document errorDoc)
     {
         this.status = status;
         this.errorBody = errorBody;
+        this.errorDoc = errorDoc;
     }
 
-    SWORDError(int status, Document errorDoc)
+    public SWORDError(int status, String errorBody)
     {
-        this.status = status;
-        this.errorDoc = errorDoc;
+        this(status, errorBody, null);
+    }
+
+    public SWORDError(int status, Document errorDoc)
+    {
+        this(status, null, errorDoc);
     }
 
     public int getStatus()
