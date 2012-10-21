@@ -993,19 +993,19 @@ public class SWORDClient
 	// but with the URLs of the file resource rather than those of the standard sword urls
 	// (see sections 6.10 and 6.11 of the spec)
 
-	Content getFile(String url, String mimeType, AuthCredentials auth)
+	public Content getFile(String url, String mimeType, AuthCredentials auth)
 			throws SWORDClientException, ProtocolViolationException, SWORDError
 	{
 		return this.getContent(url, mimeType, null, auth);
 	}
 
-	SwordResponse replaceFile(String url, Deposit deposit, AuthCredentials auth)
+	public SwordResponse replaceFile(String url, Deposit deposit, AuthCredentials auth)
 			throws SWORDClientException, ProtocolViolationException, SWORDError
 	{
 		return this.replaceMedia(url, deposit, auth);
 	}
 
-	SwordResponse deleteFile(String url, AuthCredentials auth)
+	public SwordResponse deleteFile(String url, AuthCredentials auth)
 			throws SWORDClientException, ProtocolViolationException, SWORDError
 	{
 		return this.delete(url, auth);
