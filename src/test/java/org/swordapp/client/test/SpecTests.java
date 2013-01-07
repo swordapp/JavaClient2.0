@@ -26,10 +26,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Properties;
 
-// FIXME: these tests rely on a hard-coded set of fixtures to do with my local
-// set up.  This means anyone else trying to run these tests will need to reconfigure
-// and recompile.  Sorry.
-
 public class SpecTests
 {
 	private String sdIRI = null;
