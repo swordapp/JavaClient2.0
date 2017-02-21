@@ -339,7 +339,16 @@ public class SWORDClient
             http.addPackaging(options, deposit.getPackaging());
 
             // prepare the content to be delivered
-            InputStreamRequestEntity media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
+            long cl = deposit.getContentLength();
+            InputStreamRequestEntity media;
+            if (cl > -1)
+            {
+                media = new InputStreamRequestEntity(deposit.getFile(), cl, deposit.getMimeType());
+            }
+            else
+            {
+                media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
+            }
 
             // carry out the deposit
             if (log.isDebugEnabled())
@@ -459,7 +468,16 @@ public class SWORDClient
 		http.addMetadataRelevant(options, deposit.isMetadataRelevant());
 
 		// prepare the content to be delivered
-		InputStreamRequestEntity media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
+        long cl = deposit.getContentLength();
+        InputStreamRequestEntity media;
+        if (cl > -1)
+        {
+            media = new InputStreamRequestEntity(deposit.getFile(), cl, deposit.getMimeType());
+        }
+        else
+        {
+            media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
+        }
 
 		// carry out the deposit
 		if (log.isDebugEnabled())
@@ -766,7 +784,16 @@ public class SWORDClient
 		http.addPackaging(options, deposit.getPackaging());
 
 		// prepare the content to be delivered
-		InputStreamRequestEntity media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
+        long cl = deposit.getContentLength();
+        InputStreamRequestEntity media;
+        if (cl > -1)
+        {
+            media = new InputStreamRequestEntity(deposit.getFile(), cl, deposit.getMimeType());
+        }
+        else
+        {
+            media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
+        }
 
 		// carry out the deposit
 		if (log.isDebugEnabled())
@@ -918,7 +945,16 @@ public class SWORDClient
             http.addPackaging(options, deposit.getPackaging());
 
             // prepare the content to be delivered
-            InputStreamRequestEntity media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
+            long cl = deposit.getContentLength();
+            InputStreamRequestEntity media;
+            if (cl > -1)
+            {
+                media = new InputStreamRequestEntity(deposit.getFile(), cl, deposit.getMimeType());
+            }
+            else
+            {
+                media = new InputStreamRequestEntity(deposit.getFile(), deposit.getMimeType());
+            }
 
             // carry out the deposit
             if (log.isDebugEnabled())

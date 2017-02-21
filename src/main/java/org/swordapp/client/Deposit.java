@@ -6,6 +6,7 @@ public class Deposit
 {
     private EntryPart entryPart = null;
     private InputStream file = null;
+    private long contentLength = -1;
     private String filename = null;
     private String mimeType = null;
     private String slug = null;
@@ -19,8 +20,15 @@ public class Deposit
     public Deposit(EntryPart entryPart, InputStream file, String filename, String mimeType, String packaging,
                    String slug, String md5, boolean inProgress, boolean metadataRelevant)
     {
-		this.entryPart = entryPart;
+        this(entryPart, file, -1, filename, mimeType, packaging, slug, md5, inProgress, metadataRelevant);
+    }
+
+    public Deposit(EntryPart entryPart, InputStream file, long contentLength, String filename, String mimeType, String packaging,
+                   String slug, String md5, boolean inProgress, boolean metadataRelevant)
+    {
+        this.entryPart = entryPart;
         this.file = file;
+        this.contentLength = contentLength;
         this.filename = filename;
         this.mimeType = mimeType;
         this.packaging = packaging;
@@ -89,6 +97,16 @@ public class Deposit
     public void setFilename(String filename)
     {
         this.filename = filename;
+    }
+
+    public long getContentLength()
+    {
+        return contentLength;
+    }
+
+    public void setContentLength(long contentLength)
+    {
+        this.contentLength = contentLength;
     }
 
     public String getMimeType()
