@@ -1539,6 +1539,7 @@ public class SWORDClient
     private void prepAuth(AuthCredentials auth, AbderaClient client, RequestOptions options)
             throws SWORDClientException
     {
+        client.usePreemptiveAuthentication(true);
         HttpHeaders http = new HttpHeaders();
 
         // sort out the HTTP basic authentication credentials
