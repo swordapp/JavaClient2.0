@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.swordapp</groupId>
     <artifactId>sword2-client</artifactId>
-    <version>0.9.3</version>
+    <version>0.9.4-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>SWORD v2 :: Client Library</name>
@@ -25,7 +25,7 @@
         <url>git@github.com:swordapp/JavaClient2.0.git</url>
         <developerConnection>scm:git:git@github.com:swordapp/JavaClient2.0.git</developerConnection>
         <connection>scm:git:git@github.com:swordapp/JavaClient2.0.git</connection>
-      <tag>sword2-client-0.9.3</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <developers>
