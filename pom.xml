@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.swordapp</groupId>
     <artifactId>sword2-client</artifactId>
-    <version>0.9.3</version>
+    <version>0.9.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <name>SWORD v2 :: Client Library</name>
@@ -34,6 +34,17 @@
             <email>swordv2@oneoverzero.com</email>
         </developer>
     </developers>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <plugins>
